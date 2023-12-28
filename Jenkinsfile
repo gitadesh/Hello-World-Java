@@ -43,12 +43,36 @@ pipeline{
                 }
             }
         }
+        stage('Build by Maven Package') {
+            steps {
+                sh 'mvn clean package'
+            }
+
+        }
+
+
+        stage('Build Docker OWN image') {
+            steps {
+                sh "sudo docker build -t  adesh/javaweb:${BUILD_TAG}  ."
+                //sh 'whoami'
+            }
+
+        // Step 2
+        stage('Build by Maven') {
+                steps {
+                    sh 'mvn clean package'
+                }
+        }
         stage('Push image to docker hub') {
             steps{
                 //withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWD', variable: 'DOCKER_HUB_PASS_CODE')]) {
-                sh "sudo docker login -u hubadesh -p Adesh@12345 "
+                sh "sudo docker login -u hubadesh -p $DOCKER_HUB_PASS_CODE "
                 sh "sudo docker push hubadesh/javaweb:${BUILD_TAG}"
             }
-        }     
+        } 
+    
     }
 }
+
+
+
