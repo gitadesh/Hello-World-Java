@@ -12,15 +12,10 @@ pipeline{
                 git 'https://github.com/gitadesh/jenkins-training-CI-CD-Day6.git'
             }
         }
-        stage{
-            stage('print user') {
-                steps{
-                    script{
-                        script{
-                            sh whomi
-                        }
-                    }
-                }
+        stage ('who') {
+            steps{
+                sh whomi
+            }
             }
         }
         // step2 
