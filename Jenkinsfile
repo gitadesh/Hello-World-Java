@@ -16,7 +16,6 @@ pipeline{
             steps{
                 sh whomi
             }
-            }
         }
         // step2 
         stage('build') {
@@ -30,8 +29,6 @@ pipeline{
                     sh "sudo docker build -t hubadesh/myimage:${BUILD_NUMBER} ."
                 }
         }
+    }    
 
-    }
 }
-
-
