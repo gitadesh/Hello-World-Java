@@ -12,7 +12,7 @@ pipeline{
                 git 'https://github.com/gitadesh/jenkins-training-CI-CD-Day6.git'
             }
         }
-        stage ('who') {
+        stage('who') {
             steps{
                 sh whomi
             }
