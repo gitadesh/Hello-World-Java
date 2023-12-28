@@ -13,40 +13,15 @@ pipeline{
             }
         }
         // step2 
-        stage("build by maven"){
+        stage('build') {
             steps{
-                sh 'mvn clean install -DskipTests'
-            }
-            post{
-                success{
-                    archiveArtifacts artifacts: '**/target/*.*ar'
-                }
-            }
-        }
-        stage("unit test"){
-            steps{
-                sh 'mvn test'
-            }
-        }
-        stage("integration test"){
-            steps{
-                sh 'mvn verify -DskipTests'
-            }
-        } 
-        stage("code analysis with checkstyle"){
-            steps{
-                sh 'mvn checkstyle:checkstyle'
-            }
-            post{
-                success{
-                    echo 'generate analysis result'
-                }
+                sh 'mvn clean package'
             }
         }
                 // Step 3
         stage('Build docker image') {
                 steps {
-                    sh "docker build -t hubadesh/javaapp-day6:${BUILD_NUMBER} ."
+                    sh "sudo docker build -t hubadesh/myimage:${BUILD_NUMBER} ."
                 }
         }
 
