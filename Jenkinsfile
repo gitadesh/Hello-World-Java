@@ -42,8 +42,13 @@ pipeline{
                     echo 'generate analysis result'
                 }
             }
+        }
+        stage('Push image to docker hub') {
+            steps{
+                //withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWD', variable: 'DOCKER_HUB_PASS_CODE')]) {
+                sh "sudo docker login -u hubadesh -p Adesh@12345 "
+                sh "sudo docker push hubadesh/javaweb:${BUILD_TAG}"
+            }
         }     
     }
 }
-
-
