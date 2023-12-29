@@ -18,12 +18,6 @@ pipeline{
                 sh 'mvn clean package'
             }
         }
-                // Step 3
-        stage('Build docker image') {
-                steps {
-                    sh "sudo docker build -t hubadesh/myimage:${BUILD_NUMBER} ."
-                }
-        }
     }    
 
 }
